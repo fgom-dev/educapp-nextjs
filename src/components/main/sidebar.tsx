@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils"
-import Link from "next/link"
+import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 export type SidebarGenericProps<T = any> = {
   children: React.ReactNode
@@ -8,7 +8,12 @@ export type SidebarGenericProps<T = any> = {
 
 export function Sidebar({ children, className }: SidebarGenericProps) {
   return (
-    <aside className={cn(['border-r border-border flex flex-col space-y-6', className])}>
+    <aside
+      className={cn([
+        'border-r border-border flex flex-col space-y-6',
+        className,
+      ])}
+    >
       {children}
     </aside>
   )
@@ -22,52 +27,43 @@ export function SidebarHeader({ children, className }: SidebarGenericProps) {
   )
 }
 
-export function SidebarHeaderTitle({ children, className }: SidebarGenericProps) {
-  return (
-    <h2 className={cn(['', className])}>
-      {children}
-    </h2>
-  )
+export function SidebarHeaderTitle({
+  children,
+  className,
+}: SidebarGenericProps) {
+  return <h2 className={cn(['', className])}>{children}</h2>
 }
 
 export function SidebarMain({ children, className }: SidebarGenericProps) {
-  return (
-    <main className={cn(['px-3', className])}>
-      {children}
-    </main>
-  )
+  return <main className={cn(['px-3', className])}>{children}</main>
 }
 
 export function SidebarNav({ children, className }: SidebarGenericProps) {
-  return (
-    <nav className={cn(['', className])}>
-      {children}
-    </nav>
-  )
+  return <nav className={cn(['', className])}>{children}</nav>
 }
 
 export function SidebarNavHeader({ children, className }: SidebarGenericProps) {
-  return (
-    <header className={cn(['', className])}>
-      {children}
-    </header>
-  )
+  return <header className={cn(['', className])}>{children}</header>
 }
 
-export function SidebarNavHeaderTitle({ children, className }: SidebarGenericProps) {
+export function SidebarNavHeaderTitle({
+  children,
+  className,
+}: SidebarGenericProps) {
   return (
-    <div className={cn(['text-xs uppercase text-muted-foreground ml-3', className])}>
+    <div
+      className={cn([
+        'text-xs uppercase text-muted-foreground ml-3',
+        className,
+      ])}
+    >
       {children}
     </div>
   )
 }
 
 export function SidebarNavMain({ children, className }: SidebarGenericProps) {
-  return (
-    <main className={cn(['flex flex-col', className])}>
-      {children}
-    </main>
-  )
+  return <main className={cn(['flex flex-col', className])}>{children}</main>
 }
 
 type SidebarNavLinkProps = {
@@ -75,13 +71,21 @@ type SidebarNavLinkProps = {
   active?: boolean
 }
 
-export function SidebarNavLink({ children, className, href, active }: SidebarGenericProps<SidebarNavLinkProps>) {
+export function SidebarNavLink({
+  children,
+  className,
+  href,
+  active,
+}: SidebarGenericProps<SidebarNavLinkProps>) {
   return (
-    <Link href={href} className={cn([
-      'flex items-center text-xs px-3 py-2 rounded-md gap-4',
-      active && 'bg-secondary',
-      className
-    ])}>
+    <Link
+      href={href}
+      className={cn([
+        'flex items-center text-xs px-3 py-2 rounded-md gap-4',
+        active && 'bg-secondary',
+        className,
+      ])}
+    >
       {children}
     </Link>
   )

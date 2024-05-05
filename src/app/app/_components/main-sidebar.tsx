@@ -1,12 +1,21 @@
-'use client';
+'use client'
 
-
-import { HomeIcon, MixerHorizontalIcon } from "@radix-ui/react-icons";
-import { usePathname } from "next/navigation";
-import { Session } from "next-auth";
-import { UserDropdown } from "./user-dropdown";
-import { Logo } from "@/components/logo";
-import { Sidebar, SidebarHeader, SidebarMain, SidebarNav, SidebarNavMain, SidebarNavLink, SidebarNavHeader, SidebarNavHeaderTitle, SidebarFooter } from "@/components/main/sidebar";
+import { HomeIcon, MixerHorizontalIcon } from '@radix-ui/react-icons'
+import { usePathname } from 'next/navigation'
+import { Session } from 'next-auth'
+import { UserDropdown } from './user-dropdown'
+import { Logo } from '@/components/logo'
+import {
+  Sidebar,
+  SidebarHeader,
+  SidebarMain,
+  SidebarNav,
+  SidebarNavMain,
+  SidebarNavLink,
+  SidebarNavHeader,
+  SidebarNavHeaderTitle,
+  SidebarFooter,
+} from '@/components/main/sidebar'
 
 type MainSidebarProps = {
   user: Session['user']
@@ -25,7 +34,6 @@ export function MainSidebar({ user }: MainSidebarProps) {
         <Logo />
       </SidebarHeader>
       <SidebarMain className="flex flex-col flex-grow">
-
         <SidebarNav>
           <SidebarNavMain>
             <SidebarNavLink href="/app" active={isActive('/app')}>
@@ -36,15 +44,24 @@ export function MainSidebar({ user }: MainSidebarProps) {
               <HomeIcon />
               Turmas
             </SidebarNavLink>
-            <SidebarNavLink href="/app/teachers" active={isActive('/app/teachers')}>
+            <SidebarNavLink
+              href="/app/teachers"
+              active={isActive('/app/teachers')}
+            >
               <HomeIcon />
               Professores
             </SidebarNavLink>
-            <SidebarNavLink href="/app/subjects" active={isActive('/app/subjects')}>
+            <SidebarNavLink
+              href="/app/subjects"
+              active={isActive('/app/subjects')}
+            >
               <HomeIcon />
               Disciplinas
             </SidebarNavLink>
-            <SidebarNavLink href="/app/settings" active={isActive('/app/settings')}>
+            <SidebarNavLink
+              href="/app/settings"
+              active={isActive('/app/settings')}
+            >
               <MixerHorizontalIcon />
               Configurações
             </SidebarNavLink>
@@ -53,16 +70,13 @@ export function MainSidebar({ user }: MainSidebarProps) {
 
         <SidebarNav className="mt-auto">
           <SidebarNavHeader>
-            <SidebarNavHeaderTitle>
-              Links extras
-            </SidebarNavHeaderTitle>
+            <SidebarNavHeaderTitle>Links extras</SidebarNavHeaderTitle>
           </SidebarNavHeader>
           <SidebarNavMain>
             <SidebarNavLink href="/">Precisa de ajuda?</SidebarNavLink>
             <SidebarNavLink href="/">Site</SidebarNavLink>
           </SidebarNavMain>
         </SidebarNav>
-
       </SidebarMain>
       <SidebarFooter>
         <UserDropdown user={user} />
