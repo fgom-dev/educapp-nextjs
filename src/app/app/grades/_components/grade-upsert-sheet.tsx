@@ -4,13 +4,11 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
 import {
   Sheet,
   SheetContent,
@@ -28,6 +26,13 @@ import { useForm } from 'react-hook-form'
 import { upsertGrade } from '../actions'
 import { upsertGradeSchema } from '../schema'
 import { Grade } from '../types'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 type GradeUpsertSheetProps = {
   children?: React.ReactNode
@@ -52,6 +57,10 @@ export function GradeUpsertSheet({ children }: GradeUpsertSheetProps) {
     })
   })
 
+  const listSelectGroup = ['Infantil', 'Fundamental', 'Médio']
+  const listSelectGrade = ['1°', '2°', '3°', '4°', '5°', '6°', '7°', '8°', '9°']
+  const listSelectClass = ['A', 'B', 'C', 'D', 'E', 'F']
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -70,23 +79,55 @@ export function GradeUpsertSheet({ children }: GradeUpsertSheetProps) {
 
             <FormField
               control={form.control}
+              name="group"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Grupo</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecione um Grupo" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {listSelectGroup.map((item, index) => (
+                        <SelectItem key={index} value={item}>
+                          {item}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="serie"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Série</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      min={1}
-                      max={9}
-                      inputMode="decimal"
-                      placeholder="Enter your grade serie"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Enter a number of serie of grade.
-                  </FormDescription>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecione uma Série" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {listSelectGrade.map((item, index) => (
+                        <SelectItem key={index} value={item}>
+                          {item}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -97,17 +138,24 @@ export function GradeUpsertSheet({ children }: GradeUpsertSheetProps) {
               name="grade"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Série</FormLabel>
-                  <FormControl>
-                    <Input
-                      minLength={1}
-                      maxLength={3}
-                      placeholder="Enter your grade"
-                      className="uppercase"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>Enter a grade.</FormDescription>
+                  <FormLabel>Turma</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecione uma turma" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {listSelectClass.map((item, index) => (
+                        <SelectItem key={index} value={item}>
+                          {item}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

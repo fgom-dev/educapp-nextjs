@@ -5,16 +5,33 @@ import { prisma } from '@/services/database'
 import { z } from 'zod'
 import { deleteGradeSchema, upsertGradeSchema } from './schema'
 
+enum GroupEnum {
+  Infantil,
+  Fundamental,
+  Médio,
+}
+
 export async function getUserGrades() {
   const session = await auth()
   const grades = await prisma.grade.findMany({
     where: {
       userId: session?.user?.id,
     },
-    orderBy: {
-      createdAt: 'desc',
-    },
+    orderBy: [
+      {
+        serie: 'asc',
+      },
+      {
+        grade: 'asc',
+      },
+    ],
   })
+  grades.sort((a, b) =>
+    GroupEnum[a.group as keyof typeof GroupEnum] <
+    GroupEnum[b.group as keyof typeof GroupEnum]
+      ? -1
+      : 1,
+  )
 
   return grades
 }
@@ -54,7 +71,8 @@ export async function upsertGrade(input: z.infer<typeof upsertGradeSchema>) {
       },
       data: {
         serie: input.serie,
-        grade: input.grade?.toLowerCase(),
+        grade: input.grade,
+        group: input.group,
       },
     })
 
@@ -75,10 +93,18 @@ export async function upsertGrade(input: z.infer<typeof upsertGradeSchema>) {
     }
   }
 
+  if (!input.group) {
+    return {
+      error: 'Grade is required',
+      data: null,
+    }
+  }
+
   const grade = await prisma.grade.create({
     data: {
       serie: input.serie,
-      grade: input.grade.toLowerCase(),
+      grade: input.grade,
+      group: input.group,
       userId: session?.user?.id,
     },
   })

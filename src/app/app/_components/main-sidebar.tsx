@@ -40,17 +40,12 @@ export function MainSidebar({ user }: MainSidebarProps) {
               <HomeIcon />
               Agenda
             </SidebarNavLink>
+
             <SidebarNavLink href="/app/grades" active={isActive('/app/grades')}>
               <HomeIcon />
               Turmas
             </SidebarNavLink>
-            <SidebarNavLink
-              href="/app/teachers"
-              active={isActive('/app/teachers')}
-            >
-              <HomeIcon />
-              Professores
-            </SidebarNavLink>
+
             <SidebarNavLink
               href="/app/subjects"
               active={isActive('/app/subjects')}
@@ -58,6 +53,15 @@ export function MainSidebar({ user }: MainSidebarProps) {
               <HomeIcon />
               Disciplinas
             </SidebarNavLink>
+
+            <SidebarNavLink
+              href="/app/teachers"
+              active={isActive('/app/teachers')}
+            >
+              <HomeIcon />
+              Professores
+            </SidebarNavLink>
+
             <SidebarNavLink
               href="/app/settings"
               active={isActive('/app/settings')}

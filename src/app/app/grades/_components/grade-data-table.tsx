@@ -63,6 +63,22 @@ export function GradeDataTable({ data }: GradeDataTableProps) {
 
   const columns: ColumnDef<Grade>[] = [
     {
+      accessorKey: 'group',
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="link"
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            Grupo
+            <CaretSortIcon className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => <div className="px-6">{row.getValue('group')}</div>,
+    },
+
+    {
       accessorKey: 'serie',
       header: ({ column }) => {
         return (
@@ -91,9 +107,7 @@ export function GradeDataTable({ data }: GradeDataTableProps) {
           </Button>
         )
       },
-      cell: ({ row }) => (
-        <div className="px-6 uppercase">{row.getValue('grade')}</div>
-      ),
+      cell: ({ row }) => <div className="px-6">{row.getValue('grade')}</div>,
     },
 
     {

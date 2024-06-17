@@ -45,14 +45,14 @@ model User {
   stripeCustomerId         String?
   stripeSubscriptionId     String?
   stripeSubscriptionStatus String?
-  stripePriceId            String?  
+  stripePriceId            String?
 
-  accounts                 Account[]
-  sessions                 Session[]
-  grades                   Grade[]
-  subjects                 Subject[]
-  teachers                 Teacher[]
-  schedules                Schedule[]
+  accounts  Account[]
+  sessions  Session[]
+  grades    Grade[]
+  subjects  Subject[]
+  teachers  Teacher[]
+  schedules Schedule[]
 }
 
 model VerificationToken {
@@ -64,15 +64,16 @@ model VerificationToken {
 }
 
 model Grade {
-  id          String   @id @default(cuid())
-  serie       Int
-  grade       String
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  userId      String
+  id    String @id @default(cuid())
+  group String
+  serie String
+  grade String
 
-  user        User @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+
+  user User @relation(fields: [userId], references: [id])
 }
 
 model Subject {
@@ -83,33 +84,33 @@ model Subject {
   updatedAt   DateTime @updatedAt
   userId      String
 
-  user        User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 }
 
 model Teacher {
-  id          String   @id @default(cuid())
-  name        String
-  lastname    String
-  email       String?
-  document    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  userId      String
+  id        String   @id @default(cuid())
+  name      String
+  lastname  String
+  email     String?
+  document  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
 
-  user        User @relation(fields: [userId], references: [id])  
+  user User @relation(fields: [userId], references: [id])
 }
 
 model Schedule {
-  id          String   @id @default(cuid())
-  dayOfWeek   String
-  start       String
-  end         String
-  teacherId   String
-  subjectId   String
-  gradeId     String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  userId      String
+  id        String   @id @default(cuid())
+  dayOfWeek String
+  start     String
+  end       String
+  teacherId String
+  subjectId String
+  gradeId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
 
-  user        User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 }
