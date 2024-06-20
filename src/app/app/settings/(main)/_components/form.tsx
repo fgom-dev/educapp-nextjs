@@ -1,18 +1,32 @@
 'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter } from "next/navigation"
-import { useForm } from "react-hook-form"
-import { toast } from "@/components/ui/use-toast"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { z } from "zod"
-import { SheetFooter } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-import { Session } from "next-auth"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { updateProfile } from "../../actions"
-import { updateProfileSchema } from "../../schemas"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { toast } from '@/components/ui/use-toast'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { z } from 'zod'
+import { SheetFooter } from '@/components/ui/sheet'
+import { Button } from '@/components/ui/button'
+import { Session } from 'next-auth'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { updateProfile } from '../../actions'
+import { updateProfileSchema } from '../../schemas'
 
 type ProfileFormProps = {
   defaultValues: Session['user']
@@ -25,7 +39,7 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
     defaultValues: {
       name: defaultValues?.name ?? '',
       email: defaultValues?.email ?? '',
-    }
+    },
   })
 
   const onSubmit = form.handleSubmit(async (data) => {
@@ -34,7 +48,7 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
 
     toast({
       title: 'Perfil Atualizado',
-      description: 'Seu perfil foi atualizado com sucesso.'
+      description: 'Seu perfil foi atualizado com sucesso.',
     })
   })
 
@@ -44,7 +58,9 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
         <Card>
           <CardHeader>
             <CardTitle>Nome</CardTitle>
-            <CardDescription>Por favor, insira seu nome completo.</CardDescription>
+            <CardDescription>
+              Por favor, insira seu nome completo.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <FormField
@@ -69,7 +85,10 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
         <Card>
           <CardHeader>
             <CardTitle>Email</CardTitle>
-            <CardDescription>Para alterar seu email, por favor entre em contato com contato@micro-saas.com.</CardDescription>
+            <CardDescription>
+              Para alterar seu email, por favor entre em contato com
+              contato@micro-saas.com.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <FormField

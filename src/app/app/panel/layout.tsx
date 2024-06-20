@@ -5,18 +5,18 @@ import {
   MainPageHeaderTitle,
   MainPageMain,
 } from '@/components/main/main-page'
-import { SettingsSidebar } from './_components/settings-sidebar'
+import { PanelSidebar } from './_components/panel-sidebar'
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <MainPage>
       <MainPageHeader>
-        <MainPageHeaderTitle>Configurações</MainPageHeaderTitle>
+        <MainPageHeaderTitle>Painel de controle</MainPageHeaderTitle>
       </MainPageHeader>
       <MainPageMain>
         <div className="container">
           <div className="grid grid-cols-[16rem_1fr] gap-12">
-            <SettingsSidebar />
+            <PanelSidebar />
             <div>{children}</div>
           </div>
         </div>

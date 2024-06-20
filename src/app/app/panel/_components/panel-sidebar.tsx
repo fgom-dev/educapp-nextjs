@@ -7,7 +7,7 @@ import {
 } from '@/components/main/sidebar'
 import { usePathname } from 'next/navigation'
 
-export function SettingsSidebar() {
+export function PanelSidebar() {
   const pathName = usePathname()
 
   const isActive = (path: string) => {
@@ -19,22 +19,24 @@ export function SettingsSidebar() {
       <SidebarNav>
         <SidebarNavMain>
           <SidebarNavLink
-            href={'/app/settings'}
-            active={isActive('/app/settings')}
+            href={'/app/panel/grades'}
+            active={isActive('/app/panel/grades')}
           >
-            Meu perfil
+            Turmas
           </SidebarNavLink>
+
           <SidebarNavLink
-            href={'/app/settings/theme'}
-            active={isActive('/app/settings/theme')}
+            href={'/app/panel/subjects'}
+            active={isActive('/app/panel/subjects')}
           >
-            Aparência
+            Disciplinas
           </SidebarNavLink>
+
           <SidebarNavLink
-            href={'/app/settings/billing'}
-            active={isActive('/app/settings/billing')}
+            href={'/app/panel/teachers'}
+            active={isActive('/app/panel/teachers')}
           >
-            Assinatura
+            Professores
           </SidebarNavLink>
         </SidebarNavMain>
       </SidebarNav>

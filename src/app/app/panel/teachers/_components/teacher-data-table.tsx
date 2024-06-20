@@ -33,14 +33,14 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { useRouter } from 'next/navigation'
-import { deleteSubject } from '../actions'
-import { Subject } from '../types'
+import { Teacher } from '../types'
+import { deleteTeacher } from '../actions'
 
-type SubjectDataTableProps = {
-  data: Subject[]
+type TeacherDataTableProps = {
+  data: Teacher[]
 }
 
-export function SubjectDataTable({ data }: SubjectDataTableProps) {
+export function TeacherDataTable({ data }: TeacherDataTableProps) {
   const router = useRouter()
 
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -51,8 +51,8 @@ export function SubjectDataTable({ data }: SubjectDataTableProps) {
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
-  const handleDeleteSubject = async (subject: Subject) => {
-    await deleteSubject({ id: subject.id })
+  const handleDeleteTeacher = async (teacher: Teacher) => {
+    await deleteTeacher({ id: teacher.id })
     router.refresh()
 
     // toast({
@@ -61,7 +61,7 @@ export function SubjectDataTable({ data }: SubjectDataTableProps) {
     // })
   }
 
-  const columns: ColumnDef<Subject>[] = [
+  const columns: ColumnDef<Teacher>[] = [
     {
       accessorKey: 'name',
       header: ({ column }) => {
@@ -75,32 +75,62 @@ export function SubjectDataTable({ data }: SubjectDataTableProps) {
           </Button>
         )
       },
-      cell: ({ row }) => <div className="px-6">{row.getValue('name')}</div>,
+      cell: ({ row }) => <div className="px-4">{row.getValue('name')}</div>,
     },
 
     {
-      accessorKey: 'description',
+      accessorKey: 'lastname',
       header: ({ column }) => {
         return (
           <Button
             variant="link"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            Descrição
+            Sobrenome
             <CaretSortIcon className="ml-2 h-4 w-4" />
           </Button>
         )
       },
-      cell: ({ row }) => (
-        <div className="px-6 uppercase">{row.getValue('description')}</div>
-      ),
+      cell: ({ row }) => <div className="px-4">{row.getValue('lastname')}</div>,
+    },
+
+    {
+      accessorKey: 'email',
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="link"
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            Email
+            <CaretSortIcon className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => <div className="px-4">{row.getValue('email')}</div>,
+    },
+
+    {
+      accessorKey: 'document',
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="link"
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            Documento
+            <CaretSortIcon className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      cell: ({ row }) => <div className="px-4">{row.getValue('document')}</div>,
     },
 
     {
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => {
-        const subject = row.original
+        const teacher = row.original
 
         return (
           <DropdownMenu>
@@ -113,7 +143,7 @@ export function SubjectDataTable({ data }: SubjectDataTableProps) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleDeleteSubject(subject)}>
+              <DropdownMenuItem onClick={() => handleDeleteTeacher(teacher)}>
                 Delete
               </DropdownMenuItem>
             </DropdownMenuContent>

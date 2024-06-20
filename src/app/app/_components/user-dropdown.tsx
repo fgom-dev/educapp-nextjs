@@ -1,9 +1,5 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,10 +8,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { ExitIcon, MixerHorizontalIcon, RocketIcon } from "@radix-ui/react-icons"
-import { Session } from "next-auth"
-import { signOut } from "next-auth/react"
+} from '@/components/ui/dropdown-menu'
+import {
+  ExitIcon,
+  MixerHorizontalIcon,
+  RocketIcon,
+} from '@radix-ui/react-icons'
+import { Session } from 'next-auth'
+import { signOut } from 'next-auth/react'
 
 type UserDropdownProps = {
   user: Session['user']
@@ -27,9 +27,15 @@ export function UserDropdown({ user }: UserDropdownProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="link" className="relative h-8 flex items-center justify-between w-full !px-0 space-x-6">
+        <Button
+          variant="link"
+          className="relative h-8 flex items-center justify-between w-full !px-0 space-x-6"
+        >
           <Avatar className="h-8 w-8">
-            <AvatarImage src={user.image as string} alt={`Image of ${user.name}`} />
+            <AvatarImage
+              src={user.image as string}
+              alt={`Image of ${user.name}`}
+            />
             <AvatarFallback>U</AvatarFallback>
           </Avatar>
           <div className="flex flex-col flex-1 space-y-1 text-left">

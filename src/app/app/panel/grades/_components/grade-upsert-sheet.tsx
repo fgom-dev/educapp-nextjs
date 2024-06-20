@@ -48,6 +48,7 @@ export function GradeUpsertSheet({ children }: GradeUpsertSheetProps) {
 
   const onSubmit = form.handleSubmit(async (data) => {
     await upsertGrade(data)
+    form.reset()
     router.refresh()
 
     ref.current?.click()

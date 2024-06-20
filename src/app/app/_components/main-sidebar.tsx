@@ -1,6 +1,10 @@
 'use client'
 
-import { HomeIcon, MixerHorizontalIcon } from '@radix-ui/react-icons'
+import {
+  CalendarIcon,
+  MixIcon,
+  MixerHorizontalIcon,
+} from '@radix-ui/react-icons'
 import { usePathname } from 'next/navigation'
 import { Session } from 'next-auth'
 import { UserDropdown } from './user-dropdown'
@@ -24,7 +28,11 @@ type MainSidebarProps = {
 export function MainSidebar({ user }: MainSidebarProps) {
   const pathName = usePathname()
 
-  const isActive = (path: string) => {
+  const isActive = (path: string, includes: boolean = false) => {
+    if (includes) {
+      return pathName.includes(path)
+    }
+
     return pathName === path
   }
 
@@ -37,34 +45,21 @@ export function MainSidebar({ user }: MainSidebarProps) {
         <SidebarNav>
           <SidebarNavMain>
             <SidebarNavLink href="/app" active={isActive('/app')}>
-              <HomeIcon />
+              <CalendarIcon />
               Agenda
             </SidebarNavLink>
 
-            <SidebarNavLink href="/app/grades" active={isActive('/app/grades')}>
-              <HomeIcon />
-              Turmas
-            </SidebarNavLink>
-
             <SidebarNavLink
-              href="/app/subjects"
-              active={isActive('/app/subjects')}
+              href="/app/panel/grades"
+              active={isActive('/app/panel', true)}
             >
-              <HomeIcon />
-              Disciplinas
-            </SidebarNavLink>
-
-            <SidebarNavLink
-              href="/app/teachers"
-              active={isActive('/app/teachers')}
-            >
-              <HomeIcon />
-              Professores
+              <MixIcon />
+              Painel de controle
             </SidebarNavLink>
 
             <SidebarNavLink
               href="/app/settings"
-              active={isActive('/app/settings')}
+              active={isActive('/app/settings', true)}
             >
               <MixerHorizontalIcon />
               Configurações
