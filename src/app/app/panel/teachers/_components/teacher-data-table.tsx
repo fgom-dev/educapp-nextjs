@@ -1,6 +1,6 @@
 'use client'
 
-import { CaretSortIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
+import { CaretSortIcon, EyeOpenIcon } from '@radix-ui/react-icons'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -16,14 +16,7 @@ import {
 import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+
 import {
   Table,
   TableBody,
@@ -35,6 +28,7 @@ import {
 import { useRouter } from 'next/navigation'
 import { Teacher } from '../types'
 import { deleteTeacher } from '../actions'
+import Link from 'next/link'
 
 type TeacherDataTableProps = {
   data: Teacher[]
@@ -127,27 +121,15 @@ export function TeacherDataTable({ data }: TeacherDataTableProps) {
     },
 
     {
-      id: 'actions',
+      id: 'view',
       enableHiding: false,
       cell: ({ row }) => {
         const teacher = row.original
 
         return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="link" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <DotsHorizontalIcon className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleDeleteTeacher(teacher)}>
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Link href={`/app/panel/teachers/${teacher.id}`} className="px-4">
+            <EyeOpenIcon />
+          </Link>
         )
       },
     },

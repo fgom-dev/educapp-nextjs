@@ -19,6 +19,18 @@ export async function getUserTeachers() {
   return teachers
 }
 
+export async function getTeacherById(id: string) {
+  const session = await auth()
+  const teacher = await prisma.teacher.findUnique({
+    where: {
+      id,
+      userId: session?.user.id,
+    },
+  })
+
+  return teacher
+}
+
 export async function upsertTeacher(
   input: z.infer<typeof upsertTeacherSchema>,
 ) {

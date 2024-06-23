@@ -5,7 +5,6 @@ import {
   MainPageHeaderTitle,
   MainPageMain,
 } from '@/components/main/main-page'
-import { TeacherUpsertSheet } from './_components/teacher-upsert-sheet'
 import { Button } from '@/components/ui/button'
 import { PlusCircledIcon } from '@radix-ui/react-icons'
 import { getUserTeachers } from './actions'
@@ -18,12 +17,10 @@ export default async function Page() {
       <MainPageHeader>
         <MainPageHeaderTitle>Professores</MainPageHeaderTitle>
         <MainPageHeaderNav>
-          <TeacherUpsertSheet>
-            <Button variant="outline" size="sm">
-              <PlusCircledIcon className="w-4 h-4 mr-3" />
-              Add professor
-            </Button>
-          </TeacherUpsertSheet>
+          <Button variant="outline" size="sm">
+            <PlusCircledIcon className="w-4 h-4 mr-3" />
+            Add professor
+          </Button>
         </MainPageHeaderNav>
       </MainPageHeader>
       <MainPageMain>
